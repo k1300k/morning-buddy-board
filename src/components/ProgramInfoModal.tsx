@@ -1,181 +1,161 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Info, MessageSquare, Sparkles } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 
 const ProgramInfoModal = () => {
   const versions = [
     {
       version: "v1.0",
-      date: "2025-01-15",
-      prompt: "Build a Morning Routine Dashboard that automatically updates at 5:00 AM on weekdays, showing all essential information before going to work. It skips weekends and public holidays. All UI text should remain in Korean.",
+      date: "2025-11-12",
+      prompt: "초기 프로젝트 생성",
       features: [
-        "출근 체크리스트 (출입증, 손수건, 교통카드, 이어폰, 도시락)",
-        "오늘의 날씨 정보 표시",
-        "지하철 시간표 (솔샘역 우이신설선)",
-        "자동 실행 로그",
-        "로컬 스토리지 기반 체크리스트 저장",
-      ],
-      improvements: [
-        "기본 대시보드 구조 설계",
-        "아침 분위기의 디자인 시스템 구축 (민트, 스카이블루)",
-        "반응형 레이아웃 구현",
-      ],
+        "일일 출근 루틴 대시보드 기본 구조",
+        "출근 체크리스트 컴포넌트",
+        "날씨 정보 카드",
+        "지하철 시간표",
+        "자동 실행 로그"
+      ]
     },
     {
       version: "v1.1",
-      date: "2025-01-16",
-      prompt: "완벽합니다 👌 Lovable은 영어 PRD를 인식할 때 가장 정확하게 UI 구조를 잡아주니까, 영문 PRD + 한글 UI 텍스트 유지 버전으로 최적화",
+      date: "2025-11-12",
+      prompt: "1.출근체크리스트 수정 가능 삭제 추가 수정\n2.지하철 시간표\n가.북한산 보국문(신설동) 먼저 표시하고 다음번이 삼양사거리(북한산우이) 순서\n나.평일과 공휴일/휴일(토,일)에 따라 시간 변경",
       features: [
-        "OpenWeather API 연동 준비",
-        "Supabase Edge Function 스케줄러 설계",
-        "주말/공휴일 스킵 로직",
+        "출근 체크리스트 항목 추가/수정/삭제 기능",
+        "체크리스트 로컬 스토리지 저장",
+        "지하철 시간표 방향 순서 변경 (북한산보국문 → 삼양사거리)",
+        "평일/주말 시간표 자동 전환",
+        "주말/공휴일 배지 표시"
       ],
       improvements: [
-        "PRD 기반 정확한 UI 구조화",
-        "API 연동 아키텍처 설계",
-        "크레딧 최적화 전략 수립",
-      ],
+        "사용자 맞춤형 체크리스트 관리 가능",
+        "실시간 요일 감지로 정확한 지하철 시간표 제공"
+      ]
     },
     {
       version: "v1.2",
-      date: "2025-01-17",
-      prompt: "publish 해 주세요",
+      date: "2025-11-12",
+      prompt: "자동 실행 로그에 웹페이지 네이버시계가 5시에 실행",
       features: [
-        "프로덕션 배포 준비",
-        "SEO 메타데이터 최적화",
-        "Open Graph 태그 추가",
+        "네이버 시계 웹페이지 링크 추가",
+        "오전 5시 자동 실행 안내",
+        "외부 링크 새 탭 열기 기능"
       ],
       improvements: [
-        "빌드 최적화",
-        "배포 프로세스 확립",
-        "메타데이터 개선",
-      ],
+        "자동 실행 로그에 실용적인 시계 기능 연동"
+      ]
     },
     {
       version: "v1.3",
-      date: "2025-01-18",
-      prompt: "프로그램 개발 이력 및 프롬프트 기반 정보 추가 - 해당 서비스는 바이브코딩 프롬프트 방식으로 구성되었습니다. 프롬프트 기반의 프로그램 버전으로 프로그램 설명 버튼 하나 더 추가해 주세요.",
+      date: "2025-11-12",
+      prompt: "프로그램 개발 이력 및 프롬프트 기반 정보 추가",
       features: [
-        "프로그램 정보 모달 추가",
+        "프로그램 정보 모달 컴포넌트",
         "버전별 개발 이력 표시",
-        "실제 프롬프트 질의 내용 포함",
-        "바이브코딩 방식 진화 과정 시각화",
+        "실제 사용자 프롬프트 질의 내용 포함",
+        "바이브코딩 프롬프트 방식 설명",
+        "버전별 기능 및 개선사항 상세 표시"
       ],
       improvements: [
-        "개발 투명성 확보",
-        "프롬프트 기반 개발 과정 문서화",
-        "사용자 피드백 반영 이력 추적",
-      ],
-    },
-    {
-      version: "v1.4",
-      date: "2025-01-18",
-      prompt: "설명 기능 상세에는 프롬프트의 내역이 전부 들어갔으면 합니다. 어떻게 개선 되었는지 알 수 있도록 + 실제 프롬프트 질의 내역도 다 반영해 주세요",
-      features: [
-        "전체 프롬프트 이력 상세 표시",
-        "버전별 개선사항 상세 설명",
-        "기술적 구현 내용 포함",
-        "진화 과정 타임라인 구조화",
-      ],
-      improvements: [
-        "완전한 개발 이력 투명성",
-        "각 단계별 의사결정 과정 문서화",
-        "프롬프트 엔지니어링 베스트 프랙티스 반영",
-      ],
-    },
+        "프로그램 진화 과정 투명하게 공개",
+        "AI 기반 개발 방식 시각화"
+      ]
+    }
   ];
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Info className="h-5 w-5" />
+        <Button variant="outline" size="sm" className="gap-2">
+          <Info className="w-4 h-4" />
+          프로그램 정보
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh]">
+      <DialogContent className="max-w-3xl max-h-[80vh]">
         <DialogHeader>
-          <DialogTitle className="text-2xl">출근 루틴 보드 - 개발 이력</DialogTitle>
-          <DialogDescription>
-            바이브코딩 프롬프트 방식으로 구성된 프로그램의 진화 과정
-          </DialogDescription>
+          <DialogTitle className="flex items-center gap-2 text-2xl">
+            <Sparkles className="w-6 h-6 text-primary" />
+            일일 출근 루틴 - 개발 이력
+          </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="h-[70vh] pr-4">
+        
+        <ScrollArea className="h-[60vh] pr-4">
           <div className="space-y-6">
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <h3 className="font-semibold mb-2">🎯 서비스 소개</h3>
+            <div className="p-4 bg-secondary/50 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">프로그램 소개</h3>
               <p className="text-sm text-muted-foreground">
-                평일 아침 5시에 자동으로 업데이트되는 출근 준비 대시보드입니다.
-                체크리스트, 날씨, 지하철 시간표를 한눈에 확인할 수 있으며,
-                주말과 공휴일은 자동으로 스킵됩니다.
+                이 프로그램은 <strong>바이브코딩 프롬프트 방식</strong>으로 개발되었습니다. 
+                사용자의 자연어 요청을 AI가 이해하고 즉시 구현하는 혁신적인 개발 방식으로, 
+                모든 기능이 실제 사용자 프롬프트를 통해 단계적으로 진화했습니다.
               </p>
-              <div className="mt-3 flex gap-2 flex-wrap">
-                <Badge variant="secondary">React</Badge>
-                <Badge variant="secondary">TypeScript</Badge>
-                <Badge variant="secondary">Tailwind CSS</Badge>
-                <Badge variant="secondary">Lovable</Badge>
-                <Badge variant="secondary">프롬프트 기반 개발</Badge>
-              </div>
             </div>
 
-            {versions.map((v, index) => (
-              <div key={v.version} className="border-l-4 border-primary pl-4 space-y-3">
-                <div className="flex items-center gap-3">
-                  <Badge className="text-base px-3 py-1">{v.version}</Badge>
-                  <span className="text-sm text-muted-foreground">{v.date}</span>
+            <div className="space-y-6">
+              {versions.map((version, index) => (
+                <div 
+                  key={version.version} 
+                  className="border rounded-lg p-4 bg-card hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="default">{version.version}</Badge>
+                      <span className="text-xs text-muted-foreground">{version.date}</span>
+                    </div>
+                    {index === versions.length - 1 && (
+                      <Badge variant="secondary">Latest</Badge>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="bg-muted/50 rounded-md p-3">
+                      <div className="flex items-start gap-2 mb-2">
+                        <MessageSquare className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                        <span className="text-xs font-semibold text-primary">사용자 프롬프트</span>
+                      </div>
+                      <p className="text-sm whitespace-pre-line pl-6">{version.prompt}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold mb-2">추가된 기능</h4>
+                      <ul className="space-y-1">
+                        {version.features.map((feature, idx) => (
+                          <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {version.improvements && (
+                      <div>
+                        <h4 className="text-sm font-semibold mb-2">개선사항</h4>
+                        <ul className="space-y-1">
+                          {version.improvements.map((improvement, idx) => (
+                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                              <span className="text-primary mt-1">✓</span>
+                              <span>{improvement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
+              ))}
+            </div>
 
-                <div className="bg-accent/50 p-3 rounded-md">
-                  <h4 className="text-xs font-semibold text-muted-foreground mb-1">
-                    💬 사용자 프롬프트:
-                  </h4>
-                  <p className="text-sm italic">"{v.prompt}"</p>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-semibold mb-2">✨ 추가된 기능:</h4>
-                  <ul className="text-sm space-y-1 text-muted-foreground">
-                    {v.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-primary mt-0.5">•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-semibold mb-2">🔧 개선사항:</h4>
-                  <ul className="text-sm space-y-1 text-muted-foreground">
-                    {v.improvements.map((improvement, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-primary mt-0.5">→</span>
-                        <span>{improvement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {index < versions.length - 1 && (
-                  <div className="h-4 border-l-2 border-dashed border-muted-foreground/30 ml-2" />
-                )}
-              </div>
-            ))}
-
-            <div className="bg-primary/10 p-4 rounded-lg mt-6">
-              <h3 className="font-semibold mb-2">🚀 바이브코딩 방식</h3>
+            <div className="p-4 bg-primary/10 rounded-lg text-center">
               <p className="text-sm text-muted-foreground">
-                이 프로그램은 자연어 프롬프트를 통해 단계적으로 발전했습니다.
-                각 버전은 사용자의 피드백과 요구사항을 즉시 반영하여,
-                기존 코드베이스를 유지하면서도 새로운 기능을 빠르게 추가할 수 있었습니다.
+                💡 이 프로그램은 계속해서 진화합니다. 새로운 기능이 필요하면 언제든지 요청해주세요!
               </p>
             </div>
           </div>
