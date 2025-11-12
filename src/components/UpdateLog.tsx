@@ -27,10 +27,18 @@ const UpdateLog = () => {
               <p className="text-xs text-muted-foreground mt-1">마지막 업데이트: {lastUpdate}</p>
             </div>
           </div>
-          <div className="p-3 bg-secondary rounded-lg">
+          <div className="p-3 bg-secondary rounded-lg space-y-2">
             <p className="text-xs text-muted-foreground">
               평일 오전 5시에 자동으로 업데이트됩니다.
             </p>
+            <a 
+              href="https://time.navyism.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs text-primary hover:underline block"
+            >
+              🕐 네이버 시계 웹페이지가 5시에 실행됩니다
+            </a>
           </div>
         </div>
       </CardContent>
